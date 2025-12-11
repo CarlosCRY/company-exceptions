@@ -12,5 +12,4 @@ public class SumUntilN {
         }
         return s;
     }
-    // comentario
 }
