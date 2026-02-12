@@ -5,10 +5,6 @@ import java.util.List;
 
 import java.util.Scanner;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-
-@Test
 public class Ej1 {
     public static Scanner scanner = new Scanner(System.in);
     public static void main (String[] args) {
