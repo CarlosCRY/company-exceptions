@@ -9,4 +9,17 @@ public class Account {
     private String iban;
     private String nif;
     private double balance;
+
+    public void addBalance (double added) {
+        balance += added;
+    }
+
+    public boolean removeBalance (double removed) {
+        if (balance >= removed) {
+            balance -= removed;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
