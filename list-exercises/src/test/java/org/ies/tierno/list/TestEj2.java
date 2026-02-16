@@ -7,13 +7,33 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TestEj2 {
-    public List<String> TESTLIST = List.of("Biggs", "Halligan", "Alberich", "Haze");
 
     @Test
     public void test1Input() {
-        Ej2.addAtBeggining(TESTLIST, "Pig");
+        List<String> testList = new ArrayList<>();
+        testList.add("Biggs");
+        testList.add("Halligan");
+        testList.add("Alberich");
+        testList.add("Haze");
 
-        Assertions.assertEquals("Pig", TESTLIST.get(0));
-        Assertions.assertEquals(5, TESTLIST.size());
+        Ej2.addAtBeggining(testList, "Pig");
+
+        Assertions.assertEquals("Pig", testList.get(0));
+        Assertions.assertEquals(5, testList.size());
+    }
+    @Test
+    public void test3Input() {
+        List<String> testList = new ArrayList<>();
+        testList.add("Avatar");
+        testList.add("Shamino");
+        testList.add("Iolo");
+        testList.add("Duprey");
+
+        Ej2.addAtBeggining(testList, "Lord British");
+        Ej2.addAtBeggining(testList, "Jana");
+        Ej2.addAtBeggining(testList, "Sherry");
+
+        Assertions.assertEquals("Lord British", testList.get(2));
+        Assertions.assertEquals(7, testList.size());
     }
 }
