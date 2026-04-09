@@ -13,16 +13,16 @@ public class Tests {
     private final List<Double> LDTEST2 = List.of(2.0d, 1.5d, 4.4d);
 
     @Test
-    public void testFirst () {
+    public void testFirst() {
         Assertions.assertEquals(Optional.of("Alberich"), Methods.first(LSTEST));
     }
 
-    public void testLast () {
+    public void testLast() {
         Assertions.assertEquals(Optional.of(4), Methods.last(LITEST));
         Assertions.assertNull(Methods.last(List.of()));
 
     }
 
 
-    }
+}
 
