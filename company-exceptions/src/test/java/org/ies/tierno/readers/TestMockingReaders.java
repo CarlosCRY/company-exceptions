@@ -1,6 +1,7 @@
 package org.ies.tierno.readers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
 
@@ -23,17 +24,27 @@ public class TestMockingReaders {
     @Mock
     private Random random;
 
+    @Mock
+    private Reader<Employee> employeeReader;
+
+    @Mock
+    private Reader<Department> departmentReader;
+
     @InjectMocks
-    private EmployeeReader employeeReader;
-    private DepartmentReader departmentReader;
-    private CompanyReader companyReader;
+    private EmployeeReader employeeMocker;
+
+    @InjectMocks
+    private DepartmentReader departmentMocker;
+
+    @InjectMocks
+    private CompanyReader companyMocker;
 
     @Test
     public void testEmployeeRR () {
         when(random.nextInt(10000000, 99999999)).thenReturn(12345678);
         when(random.nextInt(anyInt())).thenReturn(0).thenReturn(2).thenReturn(1);
 
-        Employee testemployee = employeeReader.read();
+        Employee testemployee = employeeMocker.read();
         Assertions.assertEquals("12345678X", testemployee.getNif());
         Assertions.assertEquals("Alberto", testemployee.getName());
         Assertions.assertEquals("Caine", testemployee.getSurname());
@@ -42,24 +53,17 @@ public class TestMockingReaders {
 
     @Test
     public void testDepartmentRR () {
-        when(random.nextInt(1,10)).thenReturn(3);
+        when(random.nextInt(anyInt(), anyInt())).thenReturn(3);
 
+        Employee emp1 = new Employee("12345678X", "Alberto", "Caine", "Programador");
+        Employee emp2 = new Employee("23456789X", "Carlota", "Baal", "Representante");
+        Employee emp3 = new Employee("32109786X", "Dario", "Aleph", "Jefe departamento");
 
-        when(random.nextInt(10000000, 99999999)).thenReturn(12345678).thenReturn(23456789).thenReturn(32109786);
-        when(random.nextInt(anyInt())).thenReturn(0).thenReturn(2).thenReturn(1);
-        when(random.nextInt(anyInt())).thenReturn(2).thenReturn(0).thenReturn(2);
-        when(random.nextInt(anyInt())).thenReturn(3).thenReturn(4).thenReturn(0);
+        when(employeeReader.read()).thenReturn(emp1).thenReturn(emp2).thenReturn(emp3);
 
-        Department testDepartment = departmentReader.read();
+        Department testDepartment = departmentMocker.read();
         Assertions.assertEquals("Departamento", testDepartment.getName());
 
-        Set<Employee> testEmployees = new Set<>();
-        testEmployees.addAll(testDepartment.getEmployees());
-        testEmployees.stream().sorted();
-
-        Assertions.assertEquals("12345678X", testEmployees[0].getNif());
-        Assertions.assertEquals("Alberto", testemployee.getName());
-        Assertions.assertEquals("Caine", testemployee.getSurname());
-        Assertions.assertEquals("Programador", testemployee.getPosition());
+        Assertions.assertEquals(Set.of(emp1, emp2, emp3), testDepartment.getEmployees());
     }
 }
