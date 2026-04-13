@@ -1,7 +1,5 @@
 package org.ies.tierno.readers;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
 
@@ -19,25 +17,13 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.anyInt;
 
 @ExtendWith(MockitoExtension.class)
-public class TestMockingReaders {
+public class TestMockingEmployee {
 
     @Mock
     private Random random;
 
-    @Mock
-    private Reader<Employee> employeeReader;
-
-    @Mock
-    private Reader<Department> departmentReader;
-
     @InjectMocks
     private EmployeeReader employeeMocker;
-
-    @InjectMocks
-    private DepartmentReader departmentMocker;
-
-    @InjectMocks
-    private CompanyReader companyMocker;
 
     @Test
     public void testEmployeeRR () {
@@ -49,21 +35,5 @@ public class TestMockingReaders {
         Assertions.assertEquals("Alberto", testemployee.getName());
         Assertions.assertEquals("Caine", testemployee.getSurname());
         Assertions.assertEquals("Programador", testemployee.getPosition());
-    }
-
-    @Test
-    public void testDepartmentRR () {
-        when(random.nextInt(anyInt(), anyInt())).thenReturn(3);
-
-        Employee emp1 = new Employee("12345678X", "Alberto", "Caine", "Programador");
-        Employee emp2 = new Employee("23456789X", "Carlota", "Baal", "Representante");
-        Employee emp3 = new Employee("32109786X", "Dario", "Aleph", "Jefe departamento");
-
-        when(employeeReader.read()).thenReturn(emp1).thenReturn(emp2).thenReturn(emp3);
-
-        Department testDepartment = departmentMocker.read();
-        Assertions.assertEquals("Departamento", testDepartment.getName());
-
-        Assertions.assertEquals(Set.of(emp1, emp2, emp3), testDepartment.getEmployees());
     }
 }
