@@ -1,9 +1,7 @@
 package org.ies.tierno.readers;
 
-import java.util.Set;
 import java.util.Random;
 
-import org.ies.tierno.modules.Department;
 import org.ies.tierno.modules.Employee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
