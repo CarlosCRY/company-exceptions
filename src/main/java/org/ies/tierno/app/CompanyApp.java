@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 @Log4j
 @AllArgsConstructor
-public class CompanyApp {
+public class CompanyApp implements App {
     private final Scanner scanner;
     private final CompanyReader companyReader;
 
